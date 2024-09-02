@@ -21,7 +21,7 @@ class MLService:
         try:
             features_array = np.array(features).reshape(1, -1)
             prediction = self.model.predict(features_array)
-            return prediction[0]
+            return prediction
         except Exception as e:
             print(f"Error making prediction on {features}. Caught Exception {e}")
             return None
