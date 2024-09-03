@@ -1,12 +1,14 @@
 import joblib
 import numpy as np
 from constants import DEFAULT_MODEL_PATH
+from sklearn.datasets import fetch_california_housing
 
 
 class MLService:
     def __init__(self, model_path=DEFAULT_MODEL_PATH):
         self.model_path = model_path
         self.model = self.load_model()
+        self.feature_averages = self.calculate_feature_averages()
         
     def load_model(self):
         try:
@@ -25,3 +27,8 @@ class MLService:
         except Exception as e:
             print(f"Error making prediction on {features}. Caught Exception {e}")
             return None
+    
+    def calculate_feature_averages(self):
+        # This function calculates the averages from your training data
+        california = fetch_california_housing()
+        return np.mean(california.data, axis=0)
