@@ -1,0 +1,85 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>House Price Prediction</h1>
+        <div class="form-container">
+            <form action="/" method="post">
+                <table>
+                    <tr>
+                        <td><label for="MedInc">Median Income:</label></td>
+                        <td>
+                            <input type="number" id="MedInc" name="MedInc" step="any" value="{{ '%.2f' % feature_values['MedInc'] }}" required>
+                            <span class="helper-text">Typical range: {{ '%.2f' % (feature_averages[0] / 2) }} to {{ '%.2f' % (feature_averages[0] * 2) }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="HouseAge">House Age:</label></td>
+                        <td>
+                            <input type="number" id="HouseAge" name="HouseAge" step="any" value="{{ '%.2f' % feature_values['HouseAge'] }}" required>
+                            <span class="helper-text">Typical range: {{ '%.2f' % (feature_averages[1] / 2) }} to {{ '%.2f' % (feature_averages[1] * 2) }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="AveRooms">Average Rooms:</label></td>
+                        <td>
+                            <input type="number" id="AveRooms" name="AveRooms" step="any" value="{{ '%.2f' % feature_values['AveRooms'] }}" required>
+                            <span class="helper-text">Typical range: {{ '%.2f' % (feature_averages[2] / 2) }} to {{ '%.2f' % (feature_averages[2] * 2) }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="AveBedrms">Average Bedrooms:</label></td>
+                        <td>
+                            <input type="number" id="AveBedrms" name="AveBedrms" step="any" value="{{ '%.2f' % feature_values['AveBedrms'] }}" required>
+                            <span class="helper-text">Typical range: {{ '%.2f' % (feature_averages[3] / 2) }} to {{ '%.2f' % (feature_averages[3] * 2) }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Population">Population:</label></td>
+                        <td>
+                            <input type="number" id="Population" name="Population" step="any" value="{{ '%.2f' % feature_values['Population'] }}" required>
+                            <span class="helper-text">Typical range: {{ '%.2f' % (feature_averages[4] / 2) }} to {{ '%.2f' % (feature_averages[4] * 2) }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="AveOccup">Average Occupancy:</label></td>
+                        <td>
+                            <input type="number" id="AveOccup" name="AveOccup" step="any" value="{{ '%.2f' % feature_values['AveOccup'] }}" required>
+                            <span class="helper-text">Typical range: {{ '%.2f' % (feature_averages[5] / 2) }} to {{ '%.2f' % (feature_averages[5] * 2) }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Latitude">Latitude:</label></td>
+                        <td>
+                            <input type="number" id="Latitude" name="Latitude" step="any" value="{{ '%.2f' % feature_values['Latitude'] }}" required>
+                            <span class="helper-text">Typical range: {{ '%.2f' % (feature_averages[6] / 2) }} to {{ '%.2f' % (feature_averages[6] * 2) }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Longitude">Longitude:</label></td>
+                        <td>
+                            <input type="number" id="Longitude" name="Longitude" step="any" value="{{ '%.2f' % feature_values['Longitude'] }}" required>
+                            <span class="helper-text">Typical range: {{ '%.2f' % (feature_averages[7] / 2) }} to {{ '%.2f' % (feature_averages[7] * 2) }}</span>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" value="Predict">
+            </form>
+            {% if prediction %}
+            <div class="prediction-container">
+                <h2>Predicted Price:</h2>
+                <p>${{ '%.2f' % prediction }} Million</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
